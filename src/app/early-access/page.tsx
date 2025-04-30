@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Check, ArrowRight, Car, Mail, User } from "lucide-react"
+import { Check, ArrowRight, Mail, User } from "lucide-react"
 
 const earlyAccessFormSchema = z.object({
     name: z.string().nonempty("First name is required"),
