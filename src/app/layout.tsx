@@ -18,6 +18,25 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Carsure | Drive with Confidence. Verify Before You Buy",
   description: "A platform to verify car history and ownership",
+  keywords: [
+    "Carsure",
+    "Car verification",
+    "Vehicle history",
+    "Ownership verification",
+    "Car ownership",
+    "Car history report",
+    "Vehicle report",
+    "Car safety",
+    "Used car verification",
+    "Car fraud prevention",
+  ],
+  authors: [
+    {
+      name: "Elvis Gyau",
+      url: "gyauelvis.vercel.app",
+    },],
+  metadataBase: new URL("https://carsure.vercel.app"),
+  applicationName: "Carsure",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
