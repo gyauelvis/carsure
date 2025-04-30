@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚗 Vehicle History Checker - Waitlist Page
 
-## Getting Started
+This is the waitlist page for the Vehicle History Checker platform — a digital system designed to help vehicle buyers in Ghana verify the history and authenticity of vehicles before purchase. Users can join the waitlist to get early access and updates about the project.
 
-First, run the development server:
+## 🌟 Purpose
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Due to the lack of a standardized vehicle history system in Ghana, this project aims to:
+- Help buyers avoid stolen or accident-prone vehicles.
+- Improve road safety.
+- Enhance transparency in vehicle transactions.
+- Provide access to real-time vehicle records from official sources.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The waitlist page allows interested users to:
+- Learn about the platform’s goals.
+- Sign up to receive early updates.
+- Be notified when the beta or full product is launched.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📸 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Responsive landing page with hero section
+- Brief project overview and benefits
+- Email input form to join the waitlist
+- Success confirmation after sign-up
+- Call to action buttons (e.g. Sign up, Learn More)
+- Links to social media or project updates (optional)
 
-## Learn More
+## 🛠️ Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- Next.js 
+- Form backend ( Supabase)
+- Tailwind CSS 
+- Shadcn
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🚀 Getting Started
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/gyauelvis/carsure
+   cd vehicle-history-waitlist 
+    ```
+2. Install dependencies
+    ```bash
+    npm install
+    ```
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
