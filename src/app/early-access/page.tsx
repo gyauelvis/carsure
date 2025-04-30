@@ -78,7 +78,7 @@ export default function EarlyAccess() {
                                 </div>
                                 <h2 className="text-2xl font-bold text-white">Thank You!</h2>
                                 <p className="text-slate-300">
-                                    You've successfully joined the Carsure waitlist. We'll notify you when we launch in Ghana.
+                                    {`You've successfully joined the Carsure waitlist. We'll notify you when we launch in Ghana.`}
                                 </p>
                                 <Button
                                     className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-yellow-600 text-background"

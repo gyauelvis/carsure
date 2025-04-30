@@ -77,11 +77,11 @@ export default function WhatWeAreBuilding() {
                         </p>
 
                         <p className="leading-relaxed mt-6">
-                            However, evaluating the condition of a used vehicle can be particularly challenging for buyers without a technical background. In the local used-car market, assessments are primarily based on metrics such as mileage, engine health, and exterior and interior condition. While these factors provide some insight into a vehicle&apos;s state, they are not always reliable indicators of its overall safety and roadworthiness, as they can be easily manipulated.
+                            However, evaluating the condition of a used vehicle can be particularly challenging for buyers without a technical background. In the local used-car market, assessments are primarily based on metrics such as mileage, engine health, and exterior and interior condition. While these factors provide some insight into a vehicle&#39;s state, they are not always reliable indicators of its overall safety and roadworthiness, as they can be easily manipulated.
                         </p>
 
                         <p className="leading-relaxed mt-6">
-                            The reliability of these assessment metrics is questionable. For instance, evaluating a vehicle solely based on its exterior and interior condition is often misleading, as underlying mechanical issues or structural damage may be concealed. Similarly, odometer readings can be tampered with to display lower mileage, giving buyers a false impression of the vehicle&apos;s actual wear and tear. Accident histories are often untraceable, particularly if a vehicle has been repaired at an uncertified mechanic workshop, which is common in Ghana. There are no standardized systems in place for verifying whether a vehicle has been reported as stolen in the country which poses a significant risk to buyers.
+                            The reliability of these assessment metrics is questionable. For instance, evaluating a vehicle solely based on its exterior and interior condition is often misleading, as underlying mechanical issues or structural damage may be concealed. Similarly, odometer readings can be tampered with to display lower mileage, giving buyers a false impression of the vehicle&#39;s actual wear and tear. Accident histories are often untraceable, particularly if a vehicle has been repaired at an uncertified mechanic workshop, which is common in Ghana. There are no standardized systems in place for verifying whether a vehicle has been reported as stolen in the country which poses a significant risk to buyers.
                         </p>
 
                         <div className="flex items-center gap-3 mb-8">
