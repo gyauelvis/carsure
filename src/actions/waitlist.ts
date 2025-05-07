@@ -1,4 +1,4 @@
-import { WaitlistData } from "@/schema/waitlist";
+import { WaitlistData } from "@/schema/schema";
 import { createClient } from '@/utils/supabase/client'
 
 export const sendWaitlistData = async (data: WaitlistData) => {

@@ -19,12 +19,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Check, ArrowRight, Mail, User } from "lucide-react"
-
-const earlyAccessFormSchema = z.object({
-    name: z.string().nonempty("First name is required"),
-    email: z.string().email("Invalid email address").nonempty("Email is required"),
-    advice: z.string().optional(),
-})
+import { earlyAccessFormSchema } from "@/schema/schema"
 
 export default function EarlyAccess() {
     const form = useForm<z.infer<typeof earlyAccessFormSchema>>({
@@ -49,9 +44,6 @@ export default function EarlyAccess() {
         else toast.error("Error! Please try again later.");
         setLoading(false);
     }
-
-
-
 
     return (
         <section className="w-full relative">

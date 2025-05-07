@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "vin": "1HGCM82633A123456",
+    "importer": "Kofi Motors",
+    "status": "In Process",
+    "odometer_reading": 75200,
+    "condition": "Good",
+    "date_of_import": "2025-04-10"
+  },
+  {
+    "id": 2,
+    "vin": "WDBRF61JX2F456789",
+    "importer": "Afia Auto Hub",
+    "status": "Cleared",
+    "odometer_reading": 48300,
+    "condition": "Excellent",
+    "date_of_import": "2025-03-22"
+  },
+  {
+    "id": 3,
+    "vin": "3FAFP31391R987654",
+    "importer": "Kwame Vehicle Imports",
+    "status": "Flagged",
+    "odometer_reading": 120300,
+    "condition": "Fair",
+    "date_of_import": "2025-04-01"
+  },
+  {
+    "id": 4,
+    "vin": "5N1AT2MT4FC765432",
+    "importer": "AutoFast Ghana",
+    "status": "In Process",
+    "odometer_reading": 60120,
+    "condition": "Good",
+    "date_of_import": "2025-04-15"
+  },
+  {
+    "id": 5,
+    "vin": "JN8AZ1MW9DW123123",
+    "importer": "Reliable Auto Traders",
+    "status": "Cleared",
+    "odometer_reading": 93000,
+    "condition": "Excellent",
+    "date_of_import": "2025-02-28"
+  }
+]

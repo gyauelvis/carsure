@@ -1,0 +1,40 @@
+import { z } from "zod";
+
+export type WaitlistData = {
+    name: string;
+    email: string;
+    advice?: string;
+}
+
+export const earlyAccessFormSchema = z.object({
+    name: z.string().nonempty("First name is required"),
+    email: z.string().email("Invalid email address").nonempty("Email is required"),
+    advice: z.string().optional(),
+})
+
+export const vehicleSchema = z.object({
+    id: z.string(),
+    vin: z.string(),
+    importer: z.string(),
+    status: z.enum(["Cleared", "In Process", "Flagged"]),
+    odometer_reading: z.string(),
+    condition: z.enum(["Excellent", "Good", "Fair", "Poor"]),
+    date_of_import: z.string()
+})
+
+export const newVehicleEntryFormSchema = z.object({
+    vin: z.string().min(17, "Must be 17 character long").max(17, "Must be 17 character long").nonempty("VIN is required"),
+    make: z.string().nonempty("Make is required"),
+    model: z.string().nonempty("Model is required"),
+    year: z.string().nonempty("Year is required"),
+    color: z.string().nonempty("Color is required"),
+    mileage: z.string().nonempty("Mileage is required"),
+    condition: z.string().nonempty("Condition is required"),
+    remarks: z.string().optional(),
+    images: z.array(z.string()).optional(),
+    importer: z.string().nonempty('Importer Name is required'),
+    originCountry: z.string().nonempty("Origin country is required"),
+    engineType: z.string().nonempty("Engine type is required"),
+    bodyType: z.string().nonempty("Body type is required"),
+    importDate: z.string().nonempty("Import date is required"),
+})
