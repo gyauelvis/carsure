@@ -1,12 +1,11 @@
 'use client'
 
-"use client";
-
 import { Button } from "@/components/ui/button";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { decodeVin } from "@/actions/vin-decoder";
 import {
     Select,
     SelectContent,
@@ -18,6 +17,8 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { newVehicleEntryFormSchema } from "@/schema/schema";
 import { useForm } from "react-hook-form";
+import { Label } from "@/components/ui/label";
+import VehiclePreviewDialog from "@/components/custom-form-dialog";
 import {
     Form,
     FormControl,
@@ -27,8 +28,22 @@ import {
     FormMessage,
 } from "@/components/ui/form"
 import { FileDropzone } from "@/components/dropzone";
+import { FileList } from "@/components/file-list-dropzone";
 
 export default function NewEntryForm() {
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+    const [fileProgresses, setFileProgresses] = useState<Record<string, number>>(
+        {}
+    );
+
+    const [open, setOpen] = useState(false);
+    const handleOpenChange = (open: boolean) => {
+        setOpen(open);
+    };
+
+
     const form = useForm<z.infer<typeof newVehicleEntryFormSchema>>({
         resolver: zodResolver(newVehicleEntryFormSchema),
         defaultValues: {
@@ -39,6 +54,7 @@ export default function NewEntryForm() {
             color: "",
             mileage: "",
             condition: "",
+            status: "In Process",
             remarks: "",
             images: [],
             importer: "",
@@ -49,15 +65,37 @@ export default function NewEntryForm() {
         },
     })
 
-    const onSubmit = (data: z.infer<typeof newVehicleEntryFormSchema>) => {
-        console.log(data);
-    }
+    const vinValue = form.watch("vin");
 
-    const fileInputRef = useRef<HTMLInputElement>(null);
-    const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
-    const [fileProgresses, setFileProgresses] = useState<Record<string, number>>(
-        {}
-    );
+    useEffect(() => {
+        const timeoutId = setTimeout(async () => {
+            if (vinValue && vinValue.length === 17) {
+                const vinData = await decodeVin(vinValue);
+                if (vinData) {
+                    form.setValue("make", vinData.make);
+                    form.setValue("model", vinData.model);
+                    form.setValue("year", vinData.year);
+                    form.setValue("engineType", vinData.engineModel);
+                    form.setValue("bodyType", vinData.bodyClass);
+                    form.setValue("originCountry", vinData.plantCountry);
+                }
+            } else {
+                console.log("VIN is invalid");
+            }
+        }, 500);
+
+        return () => clearTimeout(timeoutId);
+    }, [vinValue]);
+
+    const onSubmit = (data: z.infer<typeof newVehicleEntryFormSchema>) => {
+        form.setValue("images", uploadedFiles);
+        const formData = {
+            ...data,
+            images: uploadedFiles,
+        };
+        console.log("data", form.getValues());
+        handleOpenChange(true);
+    }
 
     const handleFileSelect = (files: FileList | null) => {
         if (!files) return;
@@ -124,7 +162,7 @@ export default function NewEntryForm() {
                                         name="vin"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Vehicle Identification Number</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Vehicle Identification Number<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -146,7 +184,7 @@ export default function NewEntryForm() {
                                         name="make"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Make</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Make<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -168,7 +206,7 @@ export default function NewEntryForm() {
                                         name="model"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Model</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Model<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -190,7 +228,7 @@ export default function NewEntryForm() {
                                         name="year"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Year of Manufacture</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Year of Manufacture<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="number"
@@ -212,7 +250,7 @@ export default function NewEntryForm() {
                                         name="engineType"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Engine Type</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Engine Type<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -234,7 +272,7 @@ export default function NewEntryForm() {
                                         name="bodyType"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Body Type</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Body Type<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -250,13 +288,13 @@ export default function NewEntryForm() {
                                         )}
                                     />
                                 </div>
-                                <div className="col-span-full">
+                                <div className="col-span-full sm:col-span-3">
                                     <FormField
                                         control={form.control}
                                         name="originCountry"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Country of Origin</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Country of Origin<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -264,6 +302,27 @@ export default function NewEntryForm() {
                                                         placeholder="Ghana"
                                                         className="mt-2"
                                                         autoComplete="originCountry"
+                                                        {...field}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage className="text-red-400" />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className="col-span-full sm:col-span-3">
+                                    <FormField
+                                        control={form.control}
+                                        name="color"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Color<span className="text-red-500">*</span></FormLabel>
+                                                <FormControl>
+                                                    <Input
+                                                        type="text"
+                                                        placeholder="Black"
+                                                        className="mt-2"
+                                                        autoComplete="color"
                                                         {...field}
                                                     />
                                                 </FormControl>
@@ -293,7 +352,7 @@ export default function NewEntryForm() {
                                         name="mileage"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Odometer Readings in kilometers(KM)</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Odometer Readings in kilometers(KM)<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="number"
@@ -316,9 +375,12 @@ export default function NewEntryForm() {
                                         name="condition"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Condition</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Condition<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
-                                                    <Select name="condition" defaultValue="good" >
+                                                    <Select
+                                                        value={field.value}
+                                                        onValueChange={(value) => field.onChange(value)}
+                                                    >
                                                         <SelectTrigger id="condition" className="mt-2 w-full">
                                                             <SelectValue placeholder="Select Condition" />
                                                         </SelectTrigger>
@@ -335,37 +397,28 @@ export default function NewEntryForm() {
                                         )}
                                     />
                                 </div>
-                                <div className="col-span-full  py-4">
-                                    <FormField
-                                        control={form.control}
-                                        name="images"
-                                        render={({ field }) => (
-                                            <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Vehicle Images</FormLabel>
-                                                <FormControl>
-                                                    <FileDropzone
-                                                        fileInputRef={fileInputRef}
-                                                        handleBoxClick={handleBoxClick}
-                                                        handleDragOver={handleDragOver}
-                                                        handleDrop={handleDrop}
-                                                        handleFileSelect={handleFileSelect}
-                                                    />
-                                                </FormControl>
-                                                <FormMessage className="text-red-400" />
-                                            </FormItem>
-                                        )}
+                                <div className="col-span-full py-4">
+                                    <Label className="text-sm w-full py-1 font-medium text-foreground dark:text-foreground flex gap-0">Vehicle Images</Label>
+                                    <FileDropzone
+                                        fileInputRef={fileInputRef}
+                                        handleBoxClick={handleBoxClick}
+                                        handleDragOver={handleDragOver}
+                                        handleDrop={handleDrop}
+                                        handleFileSelect={handleFileSelect}
                                     />
-
+                                    <FileList
+                                        uploadedFiles={uploadedFiles}
+                                        fileProgresses={fileProgresses}
+                                        removeFile={removeFile}
+                                    />
                                 </div>
                                 <div className="col-span-full">
-
-
                                     <FormField
                                         control={form.control}
                                         name="remarks"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Officer Remarks</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Officer Remarks</FormLabel>
                                                 <FormControl>
                                                     <Textarea
                                                         id="remarks"
@@ -394,13 +447,13 @@ export default function NewEntryForm() {
                         </div>
                         <div className="sm:max-w-3xl md:col-span-2">
                             <div className="grid grid-cols-1 gap-4 sm:grid-cols-6">
-                                <div className="col-span-full sm:col-span-3">
+                                <div className="col-span-full">
                                     <FormField
                                         control={form.control}
                                         name="importer"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Importer Name</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Importer Name<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="text"
@@ -424,7 +477,7 @@ export default function NewEntryForm() {
                                         name="importDate"
                                         render={({ field }) => (
                                             <FormItem>
-                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground">Date of Import</FormLabel>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Date of Import<span className="text-red-500">*</span></FormLabel>
                                                 <FormControl>
                                                     <Input
                                                         type="date"
@@ -433,6 +486,35 @@ export default function NewEntryForm() {
                                                         autoComplete="importDate"
                                                         {...field}
                                                     />
+                                                </FormControl>
+                                                <FormMessage className="text-red-400" />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+
+                                <div className="col-span-full sm:col-span-3">
+
+                                    <FormField
+                                        control={form.control}
+                                        name="status"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className="text-sm w-full font-medium text-foreground dark:text-foreground flex gap-0">Status<span className="text-red-500">*</span></FormLabel>
+                                                <FormControl>
+                                                    <Select
+                                                        value={field.value}
+                                                        onValueChange={(value) => field.onChange(value)}
+                                                    >
+                                                        <SelectTrigger id="status" className="mt-2 w-full">
+                                                            <SelectValue placeholder="Select Status" />
+                                                        </SelectTrigger>
+                                                        <SelectContent>
+                                                            <SelectItem value="Cleared">Cleared</SelectItem>
+                                                            <SelectItem value="In Process">In Process</SelectItem>
+                                                            <SelectItem value="Flagged">Flagged</SelectItem>
+                                                        </SelectContent>
+                                                    </Select>
                                                 </FormControl>
                                                 <FormMessage className="text-red-400" />
                                             </FormItem>
@@ -450,6 +532,13 @@ export default function NewEntryForm() {
                     </div>
                 </form>
             </Form>
+
+
+            {open && <VehiclePreviewDialog
+                isOpen={open}
+                onOpenChange={handleOpenChange}
+                vehicleData={form.getValues()}
+            />}
         </div >
     );
 }

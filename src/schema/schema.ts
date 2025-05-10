@@ -6,6 +6,24 @@ export type WaitlistData = {
     advice?: string;
 }
 
+export type CustomVehicleRegistrationData = {
+    vin: string;
+    make: string;
+    model: string;
+    year: string;
+    color: string;
+    condition: string;
+    status: string;
+    mileage: string;
+    remarks?: string;
+    images?: any[];
+    importer: string;
+    originCountry: string;
+    engineType: string;
+    bodyType: string;
+    importDate: string;
+}
+
 export const earlyAccessFormSchema = z.object({
     name: z.string().nonempty("First name is required"),
     email: z.string().email("Invalid email address").nonempty("Email is required"),
@@ -31,7 +49,8 @@ export const newVehicleEntryFormSchema = z.object({
     mileage: z.string().nonempty("Mileage is required"),
     condition: z.string().nonempty("Condition is required"),
     remarks: z.string().optional(),
-    images: z.array(z.string()).optional(),
+    status: z.enum(["Cleared", "In Process", "Flagged"]),
+    images: z.array(z.any()).optional(),
     importer: z.string().nonempty('Importer Name is required'),
     originCountry: z.string().nonempty("Origin country is required"),
     engineType: z.string().nonempty("Engine type is required"),
