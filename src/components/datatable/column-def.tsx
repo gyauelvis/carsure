@@ -65,7 +65,7 @@ export const columns: ColumnDef<z.infer<typeof vehicleSchema>>[] = [
     },
     {
         id: "actions",
-        cell: ({ row }) => (
+        cell: () => (
             <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                     <Button

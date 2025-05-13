@@ -9,10 +9,9 @@ import {
 } from "@/components/ui/dialog";
 import { CustomVehicleRegistrationData } from "@/schema/schema";
 import { Badge } from "@/components/ui/badge";
-import { Car, Calendar, Gauge, Palette, MapPin, Flag, Target, Clock, Image, CheckCircle } from "lucide-react";
+import { Car, Calendar, Gauge, Palette, MapPin, Flag, Target, Clock, CheckCircle } from "lucide-react";
 
 export default function VehiclePreviewDialog({ vehicleData, isOpen = false, onOpenChange }: { vehicleData: CustomVehicleRegistrationData, isOpen?: boolean, onOpenChange: (open: boolean) => void }) {
-    console.log("Vehicle Data Received: ", vehicleData);
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="sm:max-w-2xl font-sans">
@@ -104,10 +103,10 @@ export default function VehiclePreviewDialog({ vehicleData, isOpen = false, onOp
 
                         <div className="bg-card p-3 rounded-lg">
                             <h4 className="font-medium text-foreground mb-2">Media</h4>
-                            <div className="flex items-center gap-2">
-                                <Image size={16} className="text-gray-500" />
+                            {/* <div className="flex items-center gap-2">
+                                <Image  size={16} className="text-gray-500" />
                                 <span className="font-medium text-sm">Images:</span>
-                            </div>
+                            </div> */}
                             <div className="grid grid-cols-2 gap-2 mt-2">
                                 {vehicleData.images?.map((img, index) => (
                                     <div key={index} className="bg-gray-200 rounded p-2 text-xs text-center">

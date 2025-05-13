@@ -26,7 +26,7 @@ export function NavSecondary({
       <SidebarGroupContent>
         <SidebarMenu>
           {items.map((item) => (
-            <SidebarMenuItem key={item.title}>
+            <SidebarMenuItem className="text-muted-foreground" key={item.title}>
               <SidebarMenuButton asChild>
                 <a href={item.url}>
                   <item.icon />

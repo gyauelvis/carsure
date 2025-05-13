@@ -19,7 +19,7 @@ export function FileDropzone({
     return (
         <div className="py-2">
             <div
-                className="border-2 border-dashed border-border rounded-md p-8 flex flex-col items-center justify-center text-center cursor-pointer"
+                className="border border-input rounded-md p-8 flex flex-col items-center dark:bg-input/30 bg-transparent justify-center text-center cursor-pointer"
                 onClick={handleBoxClick}
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
@@ -35,7 +35,7 @@ export function FileDropzone({
                     <label
                         htmlFor="fileUpload"
                         className="text-primary hover:text-primary/90 font-medium cursor-pointer"
-                        onClick={(e) => e.stopPropagation()} // Prevent triggering handleBoxClick
+                        onClick={(e) => e.stopPropagation()} 
                     >
                         click to browse
                     </label>{" "}

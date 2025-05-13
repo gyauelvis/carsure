@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect } from "react"
+import React from "react"
 import { useRouter } from "next/navigation"
 import {
   type UniqueIdentifier,
@@ -24,10 +24,8 @@ import {
   IconChevronsRight
 } from "@tabler/icons-react"
 import {
-  ColumnFiltersState,
   Row,
   SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFacetedRowModel,
@@ -57,7 +55,7 @@ import {
   DropdownMenuCheckboxItem
 } from "@/components/ui/dropdown-menu"
 import { DropdownMenuCheckboxItemProps } from "@radix-ui/react-dropdown-menu"
-import { PlusIcon, ColumnsIcon, ChevronDownIcon, ChevronLeftIcon, ChevronsLeftIcon, ChevronsRightIcon, ChevronRightIcon } from "lucide-react"
+import { ColumnsIcon, ChevronDownIcon, ChevronLeftIcon, ChevronsLeftIcon, ChevronsRightIcon, ChevronRightIcon } from "lucide-react"
 
 type Checked = DropdownMenuCheckboxItemProps["checked"]
 
@@ -91,7 +89,8 @@ export function DashboardDataTable({
 }: {
   data: z.infer<typeof vehicleSchema>[]
 }) {
-  const [data, setData] = React.useState(() => initialData)
+  // don't forget to bring setData in the future
+  const [data] = React.useState(() => initialData)
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -252,8 +251,9 @@ export function DataTable({
 }: {
   data: z.infer<typeof vehicleSchema>[]
 }) {
+  // don't forget to bring setFilteredData in the future
   const [data, setData] = React.useState(() => initialData);
-  const [filteredData, setFilteredData] = React.useState(() => initialData);
+  const [filteredData] = React.useState(() => initialData);
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,

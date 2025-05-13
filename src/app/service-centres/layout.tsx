@@ -1,7 +1,7 @@
 
 import "@/app/globals.css";
 import { Toaster } from "@/components/ui/sonner"
-import { CustomsSideBar } from "@/components/customs/customs-sidebar";
+import MechanicsSidebar from "@/components/mechanics/mechanics-sidebar";
 import { SiteHeader } from "@/components/site-header"
 import {
     SidebarInset,
@@ -13,8 +13,6 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-
-
         <SidebarProvider
             style={
                 {
@@ -23,7 +21,7 @@ export default function RootLayout({
                 } as React.CSSProperties
             }
         >
-            <CustomsSideBar />
+            <MechanicsSidebar />
             <SidebarInset>
                 <SiteHeader />
                 {children}

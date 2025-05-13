@@ -1,13 +1,10 @@
 "use client"
 
 import * as React from "react"
+import { NavMenuType } from "@/schema/schema"
 import {
-  IconDashboard,
-  IconCirclePlus,
   IconHelp,
-  IconSearch,
-  IconCar,
-  IconFlag
+  IconSearch
 } from "@tabler/icons-react"
 import { NavMain } from "@/components/nav-main"
 import { NavSecondary } from "@/components/nav-secondary"
@@ -22,43 +19,16 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { CarsureLogo } from "@/components/icons/icons"
-import { usePathname } from "next/navigation"
 
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const pathName = usePathname();
+export function AppSidebar({ navMain, ...props }: { navMain: NavMenuType[] } & React.ComponentProps<typeof Sidebar>) {
+
   const data = {
     user: {
       name: "gyauelvis",
       email: "gyauelvis@carsure.com",
       avatar: "/avatars/shadcn.jpg",
     },
-    navMain: [
-      {
-        title: "Dashboard",
-        url: "/customs/dashboard",
-        icon: IconDashboard,
-        active: pathName.includes('dashboard') ? true : false,
-      },
-      {
-        title: "New Vehicle Entry",
-        url: "/customs/new-entry",
-        icon: IconCirclePlus,
-        active:  pathName.includes('new-entry') ? true : false,
-      },
-      {
-        title: "All Vehicles",
-        url: "/customs/all-vehicles",
-        icon: IconCar,
-        active: pathName.includes('all-vehicles') ? true : false,
-      },
-      {
-        title: "Flagged Vehicles",
-        url: "#",
-        icon: IconFlag,
-        active: false,
-      },
-    ],
     navSecondary: [
       {
         title: "Get Help",
@@ -74,7 +44,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   }
 
   return (
-    <Sidebar collapsible="offcanvas" {...props} className="font-sans">
+    <Sidebar collapsible="icon" {...props} className="font-sans">
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -91,7 +61,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        <NavMain items={data.navMain} />
+        <NavMain items={navMain} />
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>

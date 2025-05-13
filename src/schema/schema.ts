@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { type Icon } from "@tabler/icons-react"
 
 export type WaitlistData = {
     name: string;
@@ -57,3 +58,10 @@ export const newVehicleEntryFormSchema = z.object({
     bodyType: z.string().nonempty("Body type is required"),
     importDate: z.string().nonempty("Import date is required"),
 })
+
+export type NavMenuType = {
+    title: string;
+    url: string;
+    icon?: Icon;
+    active: boolean;
+} 

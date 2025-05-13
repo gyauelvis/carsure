@@ -32,7 +32,7 @@ export default function SectionCards() {
     <div className="flex items-center justify-center px-6 w-full">
       <dl className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 w-full">
         {data.map((item) => (
-          <Card key={item.name} className="p-0 gap-0 bg-gradient-t from-primary/5 to-card dark:bg-gradient-to-t dark:from-background dark:to-secondary">
+          <Card key={item.name} className="p-0 bg-gradient-to-br from-primary/10 to-background shadow-lg hover:shadow-xl border inset-10 gap-0 bg-gradient-t dark:bg-gradient-to-t dark:from-background dark:to-secondary">
             <CardContent className="p-6">
               <dd className="flex items-start justify-between space-x-2">
                 <span className="truncate text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export default function SectionCards() {
                 {item.value}
               </dd>
             </CardContent>
-            <CardFooter className="flex justify-end border-t border-border !p-0">
+            <CardFooter className="flex justify-end border-t border-border border-dashed !p-0">
               <a
                 href={item.href}
                 className="px-6 py-3 text-sm font-medium text-primary hover:text-primary/90"

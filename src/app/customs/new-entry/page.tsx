@@ -19,6 +19,8 @@ import { newVehicleEntryFormSchema } from "@/schema/schema";
 import { useForm } from "react-hook-form";
 import { Label } from "@/components/ui/label";
 import VehiclePreviewDialog from "@/components/custom-form-dialog";
+import { ArrowRightIcon } from "lucide-react";
+
 import {
     Form,
     FormControl,
@@ -70,7 +72,9 @@ export default function NewEntryForm() {
     useEffect(() => {
         const timeoutId = setTimeout(async () => {
             if (vinValue && vinValue.length === 17) {
+                console.log('its 17 now')
                 const vinData = await decodeVin(vinValue);
+                console.log(vinData)
                 if (vinData) {
                     form.setValue("make", vinData.make);
                     form.setValue("model", vinData.model);
@@ -85,7 +89,7 @@ export default function NewEntryForm() {
         }, 500);
 
         return () => clearTimeout(timeoutId);
-    }, [vinValue]);
+    }, [vinValue, form]);
 
     const onSubmit = (data: z.infer<typeof newVehicleEntryFormSchema>) => {
         form.setValue("images", uploadedFiles);
@@ -93,7 +97,7 @@ export default function NewEntryForm() {
             ...data,
             images: uploadedFiles,
         };
-        console.log("data", form.getValues());
+        console.log("data", form.getValues(), formData);
         handleOpenChange(true);
     }
 
@@ -526,8 +530,9 @@ export default function NewEntryForm() {
                     </div>
                     <Separator className="my-8" />
                     <div className="flex items-center justify-end space-x-4">
-                        <Button type="submit" className="whitespace-nowrap">
-                            Submit
+                        <Button type="submit" className="whitespace-nowrap flex items-center shadow-inner">
+                            <span>Submit</span>
+                            <ArrowRightIcon />
                         </Button>
                     </div>
                 </form>
