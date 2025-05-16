@@ -17,7 +17,7 @@ export type CustomVehicleRegistrationData = {
     status: string;
     mileage: string;
     remarks?: string;
-    images?: any[];
+    images?: File[];
     importer: string;
     originCountry: string;
     engineType: string;
