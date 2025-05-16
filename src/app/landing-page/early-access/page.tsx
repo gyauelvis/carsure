@@ -93,7 +93,7 @@ export default function EarlyAccess() {
                                                         <User className="h-4 w-4 text-card-foreground absolute left-3" />
                                                         <Input
                                                             placeholder="Enter your name"
-                                                            className="pl-10 bg-secondary border-slate-600 focus:border-blue-500 text-white"
+                                                            className="pl-10 bg-secondary border-slate-600 focus:border-blue-500 text-foreground"
                                                             {...field}
                                                         />
                                                     </div>
@@ -113,7 +113,7 @@ export default function EarlyAccess() {
                                                         <Mail className="h-4 w-4 text-card-foreground absolute left-3" />
                                                         <Input
                                                             placeholder="example@carsure.com"
-                                                            className="pl-10 bg-secondary border-slate-600 focus:border-blue-500 text-white"
+                                                            className="pl-10 bg-secondary border-slate-600 focus:border-blue-500 text-foreground"
                                                             {...field}
                                                         />
                                                     </div>
@@ -131,7 +131,7 @@ export default function EarlyAccess() {
                                                 <FormControl>
                                                     <Textarea
                                                         placeholder="Share your thoughts..."
-                                                        className="bg-secondary border-slate-600 focus:border-blue-500 text-white resize-none"
+                                                        className="bg-secondary border-slate-600 focus:border-blue-500 text-foreground resize-none"
                                                         {...field}
                                                     />
                                                 </FormControl>

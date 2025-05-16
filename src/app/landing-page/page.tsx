@@ -22,12 +22,12 @@ export default function IndexHome() {
                     Get ready for a smarter, safer way to verify vehicles in Ghana. Our platform is coming soon — sign up to stay updated and be among the first to access authentic vehicle history reports.
                 </p>
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mt-8">
-                    <button onClick={() => route.push('what-we-are-building')} className="bg-gradient-to-r from-yellow-500 to-orange-500 cursor-pointer font-mono gap-2 flex flex-row items-center capitalize px-6 py-3 md:px-8 md:py-4 rounded-full text-gray-900 font-bold text-sm md:text-lg hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 group">
+                    <button onClick={() => route.push('/landing-page/what-we-are-building')} className="bg-gradient-to-r from-yellow-500 to-orange-500 cursor-pointer font-mono gap-2 flex flex-row items-center capitalize px-6 py-3 md:px-8 md:py-4 rounded-full text-gray-900 font-bold text-sm md:text-lg hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 group">
                         <span>Learn More</span>
                         <ForwardArrow className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-300" />
                     </button>
 
-                    <button onClick={() => route.push('/early-access')} className="bg-gray-900 border-gray-700 border cursor-pointer font-mono gap-2 flex flex-row items-center capitalize px-6 py-3 md:px-8 md:py-4 rounded-full text-gray-200 font-bold text-sm md:text-lg hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/30 transition-all duration-300">
+                    <button onClick={() => route.push('/landing-page/early-access')} className="bg-gray-900 border-gray-700 border cursor-pointer font-mono gap-2 flex flex-row items-center capitalize px-6 py-3 md:px-8 md:py-4 rounded-full text-gray-200 font-bold text-sm md:text-lg hover:bg-gray-800 hover:shadow-lg hover:shadow-gray-900/30 transition-all duration-300">
                         <span>Get Early Access</span>
                     </button>
                 </div>

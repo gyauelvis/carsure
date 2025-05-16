@@ -25,7 +25,7 @@ export function NavMain({
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton className={item.active ? 'bg-primary shadow-inner text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear' : 'text-muted-foreground'} tooltip={item.title}>
+              <SidebarMenuButton className={item.active ? 'bg-muted-foreground dark:bg-secondary shadow-inner text-primary hover:bg-border hover:text-secondary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear' : 'text-muted-foreground'} tooltip={item.title}>
                 <Link href={item.url} className="flex items-center gap-4">
                   {item.icon && <item.icon/>}
                   <span>{item.title}</span>

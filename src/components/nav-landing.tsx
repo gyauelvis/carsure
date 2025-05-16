@@ -9,8 +9,8 @@ export const NavComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menu = [
-    { name: "Home", href: "/", active: pathName == '/' ? true : false },
-    { name: "What we are building", href: "/what-we-are-building", active: pathName == '/what-we-are-building' ? true : false },
+    { name: "Home", href: "/landing-page", active: pathName == '/landing-page' ? true : false },
+    { name: "What we are building", href: "/landing-page/what-we-are-building", active: pathName == '/landing-page/what-we-are-building' ? true : false },
     { name: "Reach Out", href: "mailto:gyauelvis@ieee.org", active: false },
   ]
 
@@ -63,7 +63,7 @@ export const NavComponent = () => {
 
       
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 bg-gray-900/90 backdrop-blur-sm z-40 flex flex-col transition-all duration-300">
+        <div className="md:hidden fixed inset-0 dark:bg-gray-900/90 backdrop-blur-sm z-40 flex flex-col transition-all duration-300">
           <div className="flex flex-col h-full w-full px-4 pt-24 pb-8">
             <ul className="flex flex-col space-y-6 items-center font-mono">
               {menu.map((nav, index) => (
@@ -80,7 +80,7 @@ export const NavComponent = () => {
               ))}
               <li className="w-full mt-6">
                 <Link
-                  href="/early-access"
+                  href="/landing-page/early-access"
                   className="bg-gradient-to-r from-yellow-500 to-orange-500 cursor-pointer font-mono gap-2 flex flex-row items-center justify-center capitalize px-5 py-3 rounded-full text-gray-900 font-bold text-base hover:shadow-lg hover:shadow-yellow-500/20 transition-all duration-300 w-full"
                   onClick={() => setIsMenuOpen(false)}
                 >
@@ -89,7 +89,7 @@ export const NavComponent = () => {
               </li>
             </ul>
           </div>
-          <button onClick={toggleMenu} className="absolute top-5 right-5 text-gray-400 hover:text-white">
+          <button onClick={toggleMenu} className="absolute top-5 right-5 text-gray-400 hover:text-muted-foreground dark:hover:text-white">
             <X className="size-5 absolute top-10 right-5"/> 
           </button>
         </div>
